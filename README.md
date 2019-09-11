@@ -1,11 +1,13 @@
-# spring-holidays
+# Spring-holidays
 
 Simple REST supplier of holidays for given year or period.
 
-### usage
+### Usage
 
 This application is designed to work with "project-task" as a holidays supplier.
 But since it is a web service it can be used standalone if one likes.
+
+https://github.com/artekm/swing-scheduler
 
 ### How to get holidays for a year
 
