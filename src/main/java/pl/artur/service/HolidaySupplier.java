@@ -1,4 +1,4 @@
-package com.example.demo;
+package pl.artur.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

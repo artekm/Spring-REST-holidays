@@ -1,4 +1,4 @@
-package com.example.demo;
+package pl.artur.api;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.artur.service.Holiday;
+import pl.artur.service.HolidaySupplier;
+
 @RestController
 public class HolidaysRest {
 
 	@Autowired
-	HolidaySupplier holidaySupplier;
+	private HolidaySupplier holidaySupplier;
 
 	@RequestMapping("/annual")
 	public List<Holiday> getAnnual(@RequestParam("year") int year) {
