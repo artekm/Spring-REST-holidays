@@ -47,7 +47,7 @@ public class HolidaysRestTest {
 	}
 
 	@Test
-	public void getAnnual_returnsHolidays_forGivenPeriod() throws Exception {
+	public void getPeriod_returnsHolidays_forGivenPeriod() throws Exception {
 
 		List<Holiday> holi = Arrays.asList(new Holiday(LocalDate.of(2019, 1, 1), "qwerty"));
 		LocalDate begin = LocalDate.of(2019, 1, 1);
