@@ -38,12 +38,12 @@ public class HolidaysRestTest {
 		List<Holiday> holi = Arrays.asList(new Holiday(LocalDate.of(2019, 1, 1), "abcdef"));
 		when(holidaySupplier.prepareHolidaysForYear(2019)).thenReturn(holi);
 
-		mvc.perform(get("/annual?year=2019")
+		mvc.perform(get("/getHolidays/year/2019")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$.[0].name", is("abcdef")))
-				.andExpect(jsonPath("$.[0].iso", is("2019-01-01")));
+				.andExpect(jsonPath("$.holidays[*]").isArray())
+				.andExpect(jsonPath("$.holidays[0].name", is("abcdef")))
+				.andExpect(jsonPath("$.holidays[0].iso", is("2019-01-01")));
 	}
 
 	@Test
@@ -54,11 +54,11 @@ public class HolidaysRestTest {
 		LocalDate end = LocalDate.of(2019, 2, 1);
 		when(holidaySupplier.prepareHolidaysForPeriod(begin, end)).thenReturn(holi);
 
-		mvc.perform(get("/period?begin=2019-01-01&end=2019-02-01")
+		mvc.perform(get("/getHolidays/begin/2019-01-01/end/2019-02-01")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$.[0].name", is("qwerty")))
-				.andExpect(jsonPath("$.[0].iso", is("2019-01-01")));
+				.andExpect(jsonPath("$.holidays[*]").isArray())
+				.andExpect(jsonPath("$.holidays[0].name", is("qwerty")))
+				.andExpect(jsonPath("$.holidays[0].iso", is("2019-01-01")));
 	}
 }

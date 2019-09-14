@@ -2,8 +2,12 @@ package pl.artur.service;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 public class Holiday {
+	
 	private LocalDate ISO;
+	
 	private String name;
 
 	public Holiday() {
@@ -18,6 +22,7 @@ public class Holiday {
 		return ISO;
 	}
 
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	public void setISO(LocalDate iSO) {
 		ISO = iSO;
 	}
