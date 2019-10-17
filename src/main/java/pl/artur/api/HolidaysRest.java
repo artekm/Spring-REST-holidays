@@ -22,7 +22,7 @@ public class HolidaysRest {
 	public ResponseEntity<Holidays> getAnnual(@PathVariable int year) {
 			return ResponseEntity.ok(new Holidays(holidaySupplier.prepareHolidaysForYear(year)));
 	}
-
+	
 	@RequestMapping(value = "/begin/{begin}/end/{end}", produces = "application/json")
 	public Holidays getPeriod(@PathVariable String begin, @PathVariable String end) {
 		LocalDate beginDate = LocalDate.parse(begin);
