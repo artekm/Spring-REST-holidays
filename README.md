@@ -11,13 +11,13 @@ https://github.com/artekm/swing-scheduler
 
 ### How to get holidays for a year
 
-http://localhost:8080/annual?year=2019
+http://localhost:8080/year/2019
 
 as a return it sends JSON with holidays for the 2019.
 
 ### How to get holidays for a period
 
-http://localhost:8080/period?begin=2019-05-01&end=2021-03-31
+http://localhost:8080/begin/2019-05-01/end/2021-03-31
 
 as a return it sends JSON with holidays for the given period
 
