@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
 
 @Service
+@SuppressWarnings("Convert2MethodRef")
 public class HolidaySupplier {
 
     public List<Holiday> prepareHolidaysForPeriod(LocalDate startDate, LocalDate endDate) {
-        List<Holiday> holidays = new ArrayList<>();
-        for (int year = startDate.getYear(); year <= endDate.getYear(); year++) {
-            holidays.addAll(prepareHolidaysForYear(year));
-        }
-        return holidays.stream()
-                       .filter(holiday -> !holiday.getISO().isBefore(startDate) && !holiday.getISO().isAfter(endDate))
-                       .collect(Collectors.toList());
+        return IntStream.range(startDate.getYear(), endDate.getYear() + 1)
+                        .mapToObj(year -> prepareHolidaysForYear(year))
+                        .flatMap(list -> list.stream())
+                        .filter(holiday -> !holiday.getISO().isBefore(startDate))
+                        .filter(holiday -> !holiday.getISO().isAfter(endDate))
+                        .collect(Collectors.toList());
     }
 
     public List<Holiday> prepareHolidaysForYear(int year) {
@@ -48,7 +49,7 @@ public class HolidaySupplier {
         holidays.add(new Holiday(easter.plusDays(1), "Wielkanoc"));
         holidays.add(new Holiday(easter.plusDays(49), "Zielone Świątki"));
         holidays.add(new Holiday(easter.plusDays(60), "Boże Ciało"));
-        holidays.sort(Comparator.comparing(Holiday::getISO));
+        holidays.sort(Comparator.comparing(holiday -> holiday.getISO()));
         return holidays;
     }
 }
